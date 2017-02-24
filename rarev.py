@@ -90,8 +90,7 @@ for pileupcolumn in samfile.pileup("chr1",0,5000000):
 
 
 
-print snpSet
-print dict
+print "Number of SNPs", len(snpSet)
 
 
 for k,v in dict.items():
@@ -102,9 +101,9 @@ for k,v in dict.items():
     t.append(v.count('T'))
     t.append(v.count('G'))
     if max(t)!=sum(t):
-        print k, v.count('A'),v.count('C'),v.count('T'),v.count('G')
-
-
+        print "ERROR",k, v.count('A'),v.count('C'),v.count('T'),v.count('G')
+    out.write( str(k)+","+str(v.count('A'))+str(v.count('C'))+str(v.count('T'))+str(v.count('G')) )
+    out.write("\n")
 
 
 sys.exit(1)
