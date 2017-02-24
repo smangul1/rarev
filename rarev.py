@@ -101,7 +101,7 @@ for k,v in dict.items():
     t.append(v.count('T'))
     t.append(v.count('G'))
     if max(t)!=sum(t):
-        print args,inBam,"ERROR",k, v.count('A'),v.count('C'),v.count('T'),v.count('G')
+        print args.inBam,"ERROR",k, v.count('A'),v.count('C'),v.count('T'),v.count('G')
     out.write(str(k)+","+str(v.count('A'))+","+str(v.count('C'))+","+str(v.count('T'))+","+str(v.count('G')) )
     out.write("\n")
 
