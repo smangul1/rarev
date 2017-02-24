@@ -32,7 +32,7 @@ dict={}
 out=open(args.out,"w")
 
 samfile = pysam.AlignmentFile(args.inBam, "rb" )
-for pileupcolumn in samfile.pileup("chr1",0,5000000):
+for pileupcolumn in samfile.pileup("chr1",0,10000000):
     
    
     	if pileupcolumn.n>0:
@@ -101,8 +101,8 @@ for k,v in dict.items():
     t.append(v.count('T'))
     t.append(v.count('G'))
     if max(t)!=sum(t):
-        print "ERROR",k, v.count('A'),v.count('C'),v.count('T'),v.count('G')
-    out.write( str(k)+","+str(v.count('A'))+","+str(v.count('C'))+","+str(v.count('T'))+","+str(v.count('G')) )
+        print args,inBam,"ERROR",k, v.count('A'),v.count('C'),v.count('T'),v.count('G')
+    out.write(str(k)+","+str(v.count('A'))+","+str(v.count('C'))+","+str(v.count('T'))+","+str(v.count('G')) )
     out.write("\n")
 
 
