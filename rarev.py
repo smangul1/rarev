@@ -32,7 +32,7 @@ dict={}
 out=open(args.out,"w")
 
 samfile = pysam.AlignmentFile(args.inBam, "rb" )
-for pileupcolumn in samfile.pileup("chr1"):
+for pileupcolumn in samfile.pileup("chr1",0,5000000):
     
    
     	if pileupcolumn.n>0:
@@ -71,10 +71,11 @@ for pileupcolumn in samfile.pileup("chr1"):
                                             
                                             ALT=pileupread.alignment.query_sequence[pileupread.query_position]
                                             
-                                            out.write(str(pileupcolumn.pos+1)+","+str(b)+","+str(ALT)+","+str(phreadQ))
-                                            out.write("\n")
+                                            #out.write(str(pileupcolumn.pos+1)+","+str(b)+","+str(ALT)+","+str(phreadQ))
+                                            #out.write("\n")
                                             
                                             posRef=pileupcolumn.pos+1
+                                            
                                             
                                             if posRef not in snpSet:
                                                 dict[posRef]=[]
@@ -89,8 +90,19 @@ for pileupcolumn in samfile.pileup("chr1"):
 
 
 
-print posRef
+print snpSet
+print dict
 
+
+for k,v in dict.items():
+    t=[]
+    t[:]=[]
+    t.append(v.count('A'))
+    t.append(v.count('C'))
+    t.append(v.count('T'))
+    t.append(v.count('G'))
+    if max(t)!=sum(t):
+        print k, v.count('A'),v.count('C'),v.count('T'),v.count('G')
 
 
 
