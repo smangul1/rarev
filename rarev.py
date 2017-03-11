@@ -8,7 +8,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument('inBam', help='Mapped reads in bam format')
 ap.add_argument('rl', help='read length')
 ap.add_argument('out', help='out')
-
+ap.add_argument('chr', help='chr')
 
 args = ap.parse_args()
 
@@ -29,13 +29,19 @@ snpSet=set()
 dict={}
 
 
+n=0
+
 out=open(args.out,"w")
 
 samfile = pysam.AlignmentFile(args.inBam, "rb" )
-for pileupcolumn in samfile.pileup("chr1",0,10000000):
+for pileupcolumn in samfile.pileup(args.chr):
     
    
     	if pileupcolumn.n>0:
+            n+=1
+            
+            if n%1000000==0:
+                print n
 
 
             for pileupread in pileupcolumn.pileups:
