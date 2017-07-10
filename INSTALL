@@ -1,0 +1,5 @@
+Run
+./install.sh 
+
+For hoffman2 run module load python/2.7
+
